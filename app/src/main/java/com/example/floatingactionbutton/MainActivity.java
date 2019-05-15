@@ -16,7 +16,9 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Crea
+    //Se crea un boolean
+    boolean click = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,58 +26,28 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
-        /*Se comienza a animar el floating action button y el cual comenzará en una escala 0 y terminará en su tamaño original, el codigo solo sirve en versiones de Lollipop
-        o superiores*/
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setScaleX(0);
-        fab.setScaleY(0);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            final Interpolator interpolador = AnimationUtils.loadInterpolator(getBaseContext(), android.R.interpolator.fast_out_slow_in);
+        //Se cambio la animacion anterior por la rotacion  del floating cuando sea clickeado
+        fab.setImageResource(R.drawable.ic_agregar);
 
-            fab.animate()
-                    .scaleX(1)
-                    .scaleY(1)
-                    .setInterpolator(interpolador)
-                    .setDuration(600)
-                    .setStartDelay(1000)
-                    .setListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                           fab.animate()
-                                   .scaleY(0)
-                                   .scaleX(0)
-                                   .setInterpolator(interpolador)
-                                   .setDuration(600)
-                                   .start();
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-
-                        }
-                    });
-        }
-
-        //Se le asigna una accion al FAB que se activa cuando es presionado
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Se remplazo el texto que se tenia por default
-                Snackbar.make(view, "Se presionó el Fab", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                click = !click;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Interpolator interpolator = AnimationUtils.loadInterpolator(getBaseContext(), android.R.interpolator.fast_out_slow_in);
+
+                    view.animate()
+                            .rotation(click ? 45f : 0)
+                            .setInterpolator(interpolator)
+                            .start();
+                }
+
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
