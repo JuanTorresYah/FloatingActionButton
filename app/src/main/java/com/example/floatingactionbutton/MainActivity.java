@@ -14,10 +14,12 @@ import android.view.animation.Interpolator;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 
-    //Se crea un boolean
-    boolean click = false;
+public class MainActivity extends AppCompatActivity  implements View.OnClickListener{
+
+    private FABToolbarLayout morph;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +28,40 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        morph = (FABToolbarLayout) findViewById(R.id.fabtoolbar);
+
+        View uno, dos, tres, cuatro;
+//Se asigna la interfaz de los views
+        uno = findViewById(R.id.uno);
+        dos = findViewById(R.id.dos);
+        tres = findViewById(R.id.tres);
+        cuatro = findViewById(R.id.cuatro);
+
+
 
         //Se cambio la animacion anterior por la rotacion  del floating cuando sea clickeado
-        fab.setImageResource(R.drawable.ic_agregar);
+        fab.setImageResource(R.drawable.ic_add);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click = !click;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Interpolator interpolator = AnimationUtils.loadInterpolator(getBaseContext(), android.R.interpolator.fast_out_slow_in);
+        fab.setOnClickListener(this);
 
-                    view.animate()
-                            .rotation(click ? 45f : 0)
-                            .setInterpolator(interpolator)
-                            .start();
-                }
-
-            }
-        });
+        uno.setOnClickListener(this);
+        dos.setOnClickListener(this);
+        tres.setOnClickListener(this);
+        cuatro.setOnClickListener(this);
     }
 
+//Procesa el comportamiento del FAB
+    @Override
+    public void onClick(View V){
+        if (V.getId() == R.id.fab){
+            //Permite que cuando se pulse el FAB se muestren los demás items
+            morph.show();
+        }
+        //Permite que los items de la toolbar se guanden o ya no sean visibles
+        morph.hide();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
