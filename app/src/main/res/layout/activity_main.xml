@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,76 +24,45 @@
 
     </android.support.design.widget.AppBarLayout>
 
- <com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout
-     android:id="@+id/fabtoolbar"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     app:containerId="@+id/fabtoolbar_container"
-     app:fabId="@+id/fab"
-     app:fabToolbarId="@+id/fabtoolbar_toolbar"
-     app:fadeInFraction="0.2"
-     app:hideDuration="600"
-     app:horizontalMargin="@dimen/fab_margin"
-     app:showDuration="600"
-     app:verticalMargin="@dimen/fab_margin">
+    <include layout="@layout/content_main" />
 
-  <include layout="@layout/content_main" />
-
-    <RelativeLayout
-        android:id="@+id/fabtoolbar_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/menu_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/abc_ic_menu_share_mtrl_alpha"
-        app:backgroundTint="#400"
-        app:borderWidth="0dp"
-        app:fabSize="normal"/>
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        app:fab_labelStyle="@style/Etiquetas"
+        app:fab_addButtonColorNormal="?attr/colorPrimary"
+        fab:fab_addButtonSize="normal"
+        fab:fab_labelsPosition="left">
 
-    </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/fabtoolbar_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/accion_favorito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_colorNormal="?attr/colorAccent"
+        fab:fab_icon="@drawable/ic_favorito"
+        fab:fab_size="mini"
+        fab:fab_title="Favorito" />
 
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/accion_buscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_colorNormal="?attr/colorAccent"
+        fab:fab_icon="@drawable/ic_buscar"
+        fab:fab_size="mini"
+        fab:fab_title="Buscar" />
 
-        <ImageView
-            android:id="@+id/uno"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="centerInside"
-            android:src="@drawable/abc_ic_menu_copy_mtrl_am_alpha" />
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/accion_carrito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_colorNormal="?attr/colorAccent"
+        fab:fab_icon="@drawable/ic_carrito"
+        fab:fab_size="mini"
+        fab:fab_title="Añadir a la cesta" />
 
-    <ImageView
-        android:id="@+id/dos"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:scaleType="centerInside"
-        android:src="@drawable/abc_ic_menu_paste_mtrl_am_alpha" />
-
-    <ImageView
-        android:id="@+id/tres"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:scaleType="centerInside"
-        android:src="@drawable/abc_ic_menu_selectall_mtrl_alpha" />
-
-    <ImageView
-        android:id="@+id/cuatro"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:scaleType="centerInside"
-        android:src="@drawable/abc_ic_menu_cut_mtrl_alpha" />
-
-    </LinearLayout>
-   </com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout>
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 </android.support.design.widget.CoordinatorLayout>
